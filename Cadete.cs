@@ -16,11 +16,29 @@ public class Cadete
         ListadoPedidos = new List<Pedido>();
     } 
 
+    public int JornalACobrar()
+    {
+        int pedidosEntregados = 0;
+        foreach (Pedido pedido in listadoPedidos)
+        {
+            if (pedido.Estado == EstadoPedido.Entregado)
+            {
+                pedidosEntregados++;
+            }
+        }
+        return 500 * pedidosEntregados;
+    }
+
     public void AgregarPedido(Pedido pedido){
         listadoPedidos.Add(pedido);
     }
 
-    public void QuitarPedido(Pedido pedido){
+    public void QuitarPedido(Pedido pedido){ //o entregar
         listadoPedidos.Remove(pedido);
+    }
+
+    public int TotalPedidos() 
+    {
+        return listadoPedidos.Count;
     }
 }

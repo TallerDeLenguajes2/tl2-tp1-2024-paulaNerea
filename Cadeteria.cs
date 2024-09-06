@@ -10,4 +10,19 @@ public class Cadeteria
         Telefono = telefono;
         ListadoCadetes = new List<Cadete>();
     }
+
+    public void AgregarCadete(Cadete cadete)
+    {
+        ListadoCadetes.Add(cadete);
+    }
+
+    public void QuitarCadete(Cadete cadete)
+    {
+        ListadoCadetes.Remove(cadete);
+    }
+
+    public void AsignarPedido(Cadete cadete, Pedido pedido)
+    {
+        cadete.AgregarPedido(pedido);
+    }
 }

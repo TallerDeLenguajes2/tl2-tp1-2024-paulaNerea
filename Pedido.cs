@@ -18,4 +18,18 @@ public class Pedido
         MiCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferenciaDireccionCliente);
         Estado = estado;
     }
+
+    public string VerDireccionCliente()
+    {
+        return MiCliente.Direccion;
+    }
+
+    public void VerDatosCliente()
+    {
+        Console.WriteLine("---Datos del Cliente---");
+        Console.WriteLine($"Nombre: {MiCliente.Nombre}");
+        Console.WriteLine($"Direccion: {MiCliente.Direccion}");
+        Console.WriteLine($"Telefono: {MiCliente.Telefono}");
+        Console.WriteLine($"Datos de Referencia: {MiCliente.DatosReferenciaDireccion}");
+    }
 }
