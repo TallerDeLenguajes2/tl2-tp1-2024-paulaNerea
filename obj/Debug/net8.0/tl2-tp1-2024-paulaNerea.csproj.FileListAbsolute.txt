@@ -12,3 +12,4 @@ C:\Users\Usuario\Desktop\Taller de Lenguajes II\TP01\tl2-tp1-2024-paulaNerea\obj
 C:\Users\Usuario\Desktop\Taller de Lenguajes II\TP01\tl2-tp1-2024-paulaNerea\obj\Debug\net8.0\tl2-tp1-2024-paulaNerea.pdb
 C:\Users\Usuario\Desktop\Taller de Lenguajes II\TP01\tl2-tp1-2024-paulaNerea\obj\Debug\net8.0\tl2-tp1-2024-paulaNerea.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\Taller de Lenguajes II\TP01\tl2-tp1-2024-paulaNerea\obj\Debug\net8.0\ref\tl2-tp1-2024-paulaNerea.dll
+C:\Users\Usuario\Desktop\Taller de Lenguajes II\TP01\tl2-tp1-2024-paulaNerea\obj\Debug\net8.0\tl2-tp1-2024-paulaNerea.sourcelink.json

@@ -11,12 +11,12 @@ public class Pedido
     public Cliente MiCliente { get; private set; }
     public EstadoPedido Estado { get; set; }
 
-    public Pedido(int nroPedido, string obs, string nombreCliente, string direccionCliente, string telefonoCliente, string datosReferenciaDireccionCliente, EstadoPedido estado)
+    public Pedido(int nroPedido, string obs, string nombreCliente, string direccionCliente, string telefonoCliente, string datosReferenciaDireccionCliente)
     {
         NroPedido = nroPedido;
         Obs = obs;
         MiCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferenciaDireccionCliente);
-        Estado = estado;
+        Estado = EstadoPedido.EnProceso;
     }
 
     public string VerDireccionCliente()
@@ -31,5 +31,11 @@ public class Pedido
         Console.WriteLine($"Direccion: {MiCliente.Direccion}");
         Console.WriteLine($"Telefono: {MiCliente.Telefono}");
         Console.WriteLine($"Datos de Referencia: {MiCliente.DatosReferenciaDireccion}");
+    }
+
+    //cambio el estado del pedido
+    public void CambiarEstado(EstadoPedido nuevo)
+    {
+        Estado = nuevo;
     }
 }
