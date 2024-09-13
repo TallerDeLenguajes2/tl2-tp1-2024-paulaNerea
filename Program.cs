@@ -6,60 +6,23 @@ class Program
 {
     static void Main()
     {
-        // Crear clientes
-        Cliente cliente1 = new Cliente("Juan Pérez", "Av. Siempre Viva 742", "555-1234", "Frente a la plaza");
-        Cliente cliente2 = new Cliente("Ana Gómez", "Calle Falsa 123", "555-5678", "Junto al parque");
-
-        // Crear pedidos
-        Pedido pedido1 = new Pedido(1, "Entrega urgente", cliente1.Nombre, cliente1.Direccion, cliente1.Telefono, cliente1.DatosReferenciaDireccion);
-        Pedido pedido2 = new Pedido(2, "Pedido estándar", cliente2.Nombre, cliente2.Direccion, cliente2.Telefono, cliente2.DatosReferenciaDireccion);
-
-        // Crear cadetes
-        Cadete cadete1 = new Cadete(1, "Carlos Díaz", "Calle Mayor 45", "555-9012");
-        Cadete cadete2 = new Cadete(2, "Laura Sánchez", "Calle Secundaria 67", "555-3456");
+        //ruta de los archivos csv
+        string rutaCadetes = "csv/cadetes.csv";
+        string rutaCadeteria = "csv/cadeteria.csv";
 
         // Crear cadetería
-        Cadeteria cadeteria = new Cadeteria("Cadetería Central", "555-7890");
+        Cadeteria cadeteria = CargarDesdeCSV.CargarCadeteria(rutaCadeteria);
 
-        // Agregar cadetes a la cadetería
-        cadeteria.AgregarCadete(cadete1);
-        cadeteria.AgregarCadete(cadete2);
-
-        // Asignar pedidos a cadetes
-        cadeteria.AsignarPedido(cadete1, pedido1);
-        cadeteria.AsignarPedido(cadete2, pedido2);
+        //Crear lista de cadetes
+        List<Cadete> cadetes = CargarDesdeCSV.CargarCadetes(rutaCadetes);
+        foreach (Cadete cadete in cadetes)
+        {
+            cadeteria.AgregarCadete(cadete);
+        }
 
         // Mostrar información de los cadetes
         Console.WriteLine("Lista de Cadetes:");
         cadeteria.MostrarTodosLosCadetes();
-
-        // Mostrar información de los pedidos
-        Console.WriteLine("\nDetalles del Pedido 1:");
-        pedido1.VerDatosCliente();
-        Console.WriteLine($"Estado del Pedido 1: {pedido1.Estado}");
-
-        Console.WriteLine("\nDetalles del Pedido 2:");
-        pedido2.VerDatosCliente();
-        Console.WriteLine($"Estado del Pedido 2: {pedido2.Estado}");
-
-        // Cambiar el estado del pedido 1
-        cadeteria.CambiarEstadoPedido(pedido1, EstadoPedido.Entregado);
-
-        // Mostrar el estado actualizado del pedido 1
-        Console.WriteLine("\nEstado actualizado del Pedido 1:");
-        Console.WriteLine($"Estado del Pedido 1: {pedido1.Estado}");
-
-        // Mostrar la cantidad de pedidos de cada cadete y su jornal
-        Console.WriteLine("\nJornal a Cobrar de los Cadetes:");
-        Console.WriteLine($"Jornal de {cadete1.Nombre}: {cadete1.JornalACobrar()}");
-        Console.WriteLine($"Jornal de {cadete2.Nombre}: {cadete2.JornalACobrar()}");
-
-        // Eliminar un pedido
-        cadeteria.QuitarPedido(cadete1, pedido1);
-
-        // Mostrar información después de eliminar el pedido
-        Console.WriteLine("\nDespués de eliminar el Pedido 1:");
-        Console.WriteLine($"Total de pedidos de {cadete1.Nombre}: {cadete1.TotalPedidos()}");
     }
 }
 
