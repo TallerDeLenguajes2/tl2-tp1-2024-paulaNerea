@@ -64,6 +64,28 @@ public class Cadete
         Console.WriteLine($"ID: {Id}, Nombre: {Nombre}, Dirección: {Direccion}, Teléfono: {Telefono}");
     }
 
+    public void ImprimirPedidos()
+    {
+        Console.WriteLine($"Pedidos asignados a {Nombre}:");
+        if (ListaPedidos.Count == 0)
+        {
+            Console.WriteLine("No tiene pedidos asignados.");
+        }
+        else
+        {
+            foreach (Pedido pedido in ListaPedidos)
+            {
+                Console.WriteLine($"- Pedido N° {pedido.NroPedido}, Estado: {pedido.Estado}");
+            }
+        }
+    }
+
+    public bool TienePedido(int nroPedido)
+    {
+        return listaPedidos.Any(p => p.NroPedido == nroPedido); // Suponiendo que `Pedidos` es una lista de los pedidos del cadete
+    }
+
+
 
 }
 
