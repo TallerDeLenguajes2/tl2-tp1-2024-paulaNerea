@@ -11,17 +11,25 @@ public class Pedido
     public Cliente MiCliente { get; private set; }
     public EstadoPedido Estado { get; set; }
 
+    public Cadete CadeteAsignado { get; private set; } 
+
     public Pedido(int nroPedido, string obs, string nombreCliente, string direccionCliente, string telefonoCliente, string datosReferenciaDireccionCliente)
     {
         NroPedido = nroPedido;
         Obs = obs;
         MiCliente = new Cliente(nombreCliente, direccionCliente, telefonoCliente, datosReferenciaDireccionCliente);
         Estado = EstadoPedido.EnProceso;
+        CadeteAsignado = null;
     }
 
     public string VerDireccionCliente()
     {
         return MiCliente.Direccion;
+    }
+
+    public void AsignarCadete(Cadete cadete)
+    {
+        CadeteAsignado = cadete;
     }
 
     public void VerDatosCliente()

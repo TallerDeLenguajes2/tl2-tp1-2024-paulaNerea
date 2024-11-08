@@ -4,13 +4,11 @@ public class Cadete
     private string nombre;
     private string direccion;
     private string telefono;
-    private List<Pedido> listaPedidos;
 
     public int Id { get => id; private set => id = value; }
     public string Nombre { get => nombre; private set => nombre = value; }
     public string Direccion { get => direccion; private set => direccion = value; }
     public string Telefono { get => telefono; private set => telefono = value; }
-    public List<Pedido> ListaPedidos { get => listaPedidos; private set => listaPedidos = value; }
     
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
@@ -18,10 +16,15 @@ public class Cadete
         Nombre = nombre;
         Direccion = direccion;
         Telefono = telefono;
-        ListaPedidos = new List<Pedido>();
     } 
 
-    public int JornalACobrar()
+    public void ImprimirInformacion()
+    {
+        Console.WriteLine($"ID: {Id}, Nombre: {Nombre}, Dirección: {Direccion}, Teléfono: {Telefono}");
+    }
+
+
+    /*public int JornalACobrar()
     {
         int pedidosEntregados = 0;
         foreach (Pedido pedido in ListaPedidos)
@@ -59,11 +62,6 @@ public class Cadete
         return null;
     }
 
-    public void ImprimirInformacion()
-    {
-        Console.WriteLine($"ID: {Id}, Nombre: {Nombre}, Dirección: {Direccion}, Teléfono: {Telefono}");
-    }
-
     public void ImprimirPedidos()
     {
         Console.WriteLine($"Pedidos asignados a {Nombre}:");
@@ -84,7 +82,7 @@ public class Cadete
     {
         return listaPedidos.Any(p => p.NroPedido == nroPedido); // Suponiendo que `Pedidos` es una lista de los pedidos del cadete
     }
-
+    */
 
 
 }

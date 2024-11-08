@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public class CargarDesdeCSV
+public class CargarDesdeCSV : AccesoADatos
 {
-    public static Cadeteria CargarCadeteria(string ruta)
+    public override Cadeteria CargarCadeteria(string ruta)
     {
         using (var lector = new StreamReader(ruta))
         {
@@ -20,7 +20,7 @@ public class CargarDesdeCSV
         return null;
     }
 
-    public static List<Cadete> CargarCadetes(string ruta)
+    public override List<Cadete> CargarCadetes(string ruta)
     {
         List<Cadete> cadetes = new List<Cadete>();
         using (var lector = new StreamReader(ruta))
