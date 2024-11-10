@@ -13,23 +13,27 @@ public class Cadeteria
         listadoPedidos = new List<Pedido>();
     }
 
-    public void AgregarCadete(Cadete cadete)
+    public void AgregarCadete(int id, string nombre, string direccion, string telefono)
     {
+        Cadete cadete = new Cadete(id, nombre, direccion, telefono);
         listadoCadetes.Add(cadete);
     }
 
-    public void QuitarCadete(Cadete cadete)
+    public void QuitarCadete(int id)
     {
+        Cadete cadete = BuscarCadetePorId(id);
         listadoCadetes.Remove(cadete);
     }
 
-    public void AgregarPedido(Pedido pedido)
+    public void AgregarPedido(int nroPedido, string obs, string clienteNombre, string clienteDireccion, string clienteTelefono, string clienteDatosReferenciaDireccion)
     {
+        Pedido pedido = new Pedido(nroPedido, obs, clienteNombre, clienteDireccion, clienteTelefono, clienteDatosReferenciaDireccion);
         listadoPedidos.Add(pedido);
     }
 
-    public void QuitarPedido(Pedido pedido)
+    public void QuitarPedido(int nroPedido)
     {
+        Pedido pedido = BuscarPedido(nroPedido);
         listadoPedidos.Remove(pedido);
     }
 
@@ -43,11 +47,12 @@ public class Cadeteria
         return listadoPedidos.FirstOrDefault(pedido => pedido.NroPedido == num);
     }
 
-    public void CambiarEstadoPedido(Pedido pedido, EstadoPedido nuevo)
+    public void CambiarEstadoPedido(int nroPedido, int numEstado)
     {
+        Pedido pedido = BuscarPedido(nroPedido);
         if (pedido != null)
         {
-            pedido.CambiarEstado(nuevo);
+            pedido.CambiarEstado((EstadoPedido)numEstado);
             Console.WriteLine("Se cambio el estado del pedido");
         }else
         {

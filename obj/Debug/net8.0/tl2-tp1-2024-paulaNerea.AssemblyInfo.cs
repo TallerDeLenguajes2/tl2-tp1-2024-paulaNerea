@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl2-tp1-2024-paulaNerea")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69b65296447578d6e0b945fe8f7c6dafc61738f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e77024f1f658a65ca1ed5fa905fcc561af1db65")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl2-tp1-2024-paulaNerea")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl2-tp1-2024-paulaNerea")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

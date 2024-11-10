@@ -1,8 +1,8 @@
 public enum EstadoPedido
 {
-    Entregado,
-    Cancelado,
-    EnProceso
+    Entregado = 1,
+    Cancelado = 2,
+    EnProceso = 3
 }
 public class Pedido
 {

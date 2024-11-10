@@ -39,7 +39,7 @@ class Program
         List<Cadete> cadetes = accesoADatos.CargarCadetes(rutaCadetes);
         foreach (Cadete cadete in cadetes)
         {
-            cadeteria.AgregarCadete(cadete);
+            cadeteria.AgregarCadete(cadete.Id, cadete.Nombre, cadete.Direccion, cadete.Telefono);
         }
 
         bool continuar = true;
@@ -135,8 +135,8 @@ class Program
         Console.WriteLine("Observacion del Pedido: ");
         string obs = Console.ReadLine();
 
-        Pedido pedido = new Pedido(nroPedido, obs, cliente.Nombre, cliente.Direccion, cliente.Telefono, cliente.DatosReferenciaDireccion);
-        cadeteria.AgregarPedido(pedido);
+        cadeteria.AgregarPedido(nroPedido, obs, cliente.Nombre, cliente.Direccion, cliente.Telefono, cliente.DatosReferenciaDireccion);
+        
         Console.WriteLine("Pedido Guardado con Exito");
         Console.WriteLine();
     }
@@ -213,36 +213,20 @@ class Program
     static void CambiarEstado(Cadeteria cadeteria)
     {
         Console.WriteLine("Ingrese el nro del pedido al que desea cambiar el estado: ");
-        int nro;
-        while (!int.TryParse(Console.ReadLine(), out nro))
+        int nroPedido;
+        while (!int.TryParse(Console.ReadLine(), out nroPedido))
         {
             Console.WriteLine("Por favor, ingrese un número válido.");
         }
 
-        Pedido pedido = cadeteria.BuscarPedido(nro);
-        if (pedido != null)
+        Console.WriteLine("Ingrese el nuevo estado del pedido (1: Entregado, 2: Cancelado, 3: EnProceso): ");
+        int nroEstado;
+        while (!(int.TryParse(Console.ReadLine(), out nroEstado) && nroEstado >= 1 && nroEstado <= 3) ) 
         {
-            EstadoPedido estado;
-            bool valido = false;
-            while (!valido)
-            {
-                Console.WriteLine("Ingrese el nuevo estado del pedido (Entregado, Cancelado, EnProceso): ");
-                string ingresado = Console.ReadLine();
-            
-                if (Enum.TryParse(ingresado, true, out estado))
-                {
-                    cadeteria.CambiarEstadoPedido(pedido, estado);
-                    Console.WriteLine($"Estado del pedido {nro} cambiado a {estado}.");
-                    valido = true; 
-                }else
-                {
-                    Console.WriteLine("Estado no valido. Intente nuevamente ");
-                }
-            }
-            
-        }else
-        {
-            Console.WriteLine("El pedido no existe.");
+            Console.WriteLine("Opción no válida. Por favor, ingrese un número del 1 al 3."); 
         }
+
+        cadeteria.CambiarEstadoPedido(nroPedido, nroEstado);            
+        
     }
 }
