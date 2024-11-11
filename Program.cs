@@ -68,7 +68,11 @@ class Program
                     break;
                 case 5:
                     continuar = false;
-                    cadeteria.Informe();
+                    List<string> informe = cadeteria.Informe();
+                    foreach (string linea in informe)
+                    {
+                        Console.WriteLine(linea);
+                    }
                     Console.WriteLine("Saliendo...");
                     break;
                     
@@ -123,14 +127,23 @@ class Program
 
         //Creacion del Pedido
         Console.WriteLine("Ingrese los Datos del Pedido: ");
-
-        Console.WriteLine("Nro del Pedido: ");
         int nroPedido;
-
-        while (!int.TryParse(Console.ReadLine(), out nroPedido))
+        do
         {
-            Console.WriteLine("Por favor, ingrese un numero.");
-        }
+
+            Console.WriteLine("Nro del Pedido: ");
+            while (!int.TryParse(Console.ReadLine(), out nroPedido))
+            {
+                Console.WriteLine("Por favor, ingrese un numero.");
+            }
+
+            if (cadeteria.YaExiste(nroPedido))
+            {
+                Console.WriteLine("El número de pedido ya existe. Ingrese un número diferente.");
+            }
+
+        }while (cadeteria.YaExiste(nroPedido));
+        
 
         Console.WriteLine("Observacion del Pedido: ");
         string obs = Console.ReadLine();
@@ -151,17 +164,18 @@ class Program
             Console.WriteLine("Por favor, ingrese un numero.");
         }
 
+        if (!cadeteria.YaExiste(nroPedido))
+        {
+            Console.WriteLine("El número de pedido ingresado no existe. Por favor, intente nuevamente.");
+            return;
+        }
+
         cadeteria.MostrarTodosLosCadetes();
 
         Console.Write("Ingrese el Id del Cadete al que desea asignar el pedido: ");
-        int idCadete;
-
-        while (!int.TryParse(Console.ReadLine(), out idCadete))
-        {
-            Console.WriteLine("Por favor, ingrese un numero.");
-        }
-
-        cadeteria.AsignarCadeteAPedido(idCadete, nroPedido);
+        int idCadete = ObtenerIdCadete();
+        
+        Console.WriteLine(cadeteria.AsignarCadeteAPedido(idCadete, nroPedido)); //ahora es tipo string, falta mostrarla adecuadamente
 
     }
     
@@ -197,7 +211,7 @@ class Program
             Cadete nuevoCadete = cadeteria.BuscarCadetePorId(idCadete);
             if (nuevoCadete != null)
             {
-                cadeteria.AsignarCadeteAPedido(idCadete, nro);
+                Console.WriteLine(cadeteria.AsignarCadeteAPedido(idCadete, nro)); 
             }else
             {
                 Console.WriteLine("El ID del cadete ingresado no existe. Por favor, intente nuevamente.");
@@ -226,7 +240,7 @@ class Program
             Console.WriteLine("Opción no válida. Por favor, ingrese un número del 1 al 3."); 
         }
 
-        cadeteria.CambiarEstadoPedido(nroPedido, nroEstado);            
+        Console.WriteLine(cadeteria.CambiarEstadoPedido(nroPedido, nroEstado));     
         
     }
 }

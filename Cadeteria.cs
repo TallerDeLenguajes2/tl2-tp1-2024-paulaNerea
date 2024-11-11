@@ -47,16 +47,21 @@ public class Cadeteria
         return listadoPedidos.FirstOrDefault(pedido => pedido.NroPedido == num);
     }
 
-    public void CambiarEstadoPedido(int nroPedido, int numEstado)
+    public bool YaExiste(int num)
+    {
+        return listadoPedidos.Any(pedido => pedido.NroPedido == num);
+    }
+
+    public string CambiarEstadoPedido(int nroPedido, int numEstado)
     {
         Pedido pedido = BuscarPedido(nroPedido);
         if (pedido != null)
         {
             pedido.CambiarEstado((EstadoPedido)numEstado);
-            Console.WriteLine("Se cambio el estado del pedido");
+            return $"Se cambio el estado del pedido a {(EstadoPedido)numEstado}";
         }else
         {
-            Console.WriteLine("El pedido no es valido");
+            return "El pedido no es valido";
         }
     }
 
@@ -75,17 +80,17 @@ public class Cadeteria
         return 0;
     }
 
-    public void AsignarCadeteAPedido(int idCadete, int nroPedido)
+    public string AsignarCadeteAPedido(int idCadete, int nroPedido)
     {
         Pedido pedido = BuscarPedido(nroPedido);
         Cadete cadete = BuscarCadetePorId(idCadete);
         if (pedido != null && cadete != null)
         {
             pedido.AsignarCadete(cadete);
-            Console.WriteLine($"Pedido nro: {pedido.NroPedido} Asignado a {cadete.Nombre}");
+            return $"Pedido nro: {pedido.NroPedido} Asignado a {cadete.Nombre}";
         }else
         {
-            Console.WriteLine("No fue posible asignar el pedido - (Pedido o cadete no encontrado).");
+            return "No fue posible asignar el pedido - (Pedido o cadete no encontrado).";
         }
     }
 
@@ -97,9 +102,11 @@ public class Cadeteria
         }
     }
 
-    public void Informe()
+    public List<string> Informe()
     { 
-        Console.WriteLine("--- Informe Final ---");
+        List<string> informe = new List<string>{
+            "--- Informe Final ---"
+        };
 
         int totalPedidos = listadoPedidos.Count(p => p.CadeteAsignado != null);
         int montoTotal = totalPedidos * 500;;
@@ -109,10 +116,13 @@ public class Cadeteria
             int cantEnvios = listadoPedidos.Count(p => p.CadeteAsignado != null && p.CadeteAsignado.Id == cadete.Id );
             int montoCobrar = cantEnvios * 500; //o puedo usar mi funcion jornal a cobrar en cadeteria
             
-            Console.WriteLine($"{cadete.Nombre} - Envios: {cantEnvios} - Monto Ganado: {montoCobrar}");
+            informe.Add($"{cadete.Nombre} - Envios: {cantEnvios} - Monto Ganado: {montoCobrar}");
         }
 
         double promedio = totalPedidos > 0 ? (double)totalPedidos / listadoCadetes.Count : 0; 
-        Console.WriteLine($"Envios Promedio Por Cadete: {promedio} - Total Ganado: {montoTotal}");
+        informe.Add($"Envios Promedio Por Cadete: {promedio} - Total Ganado: {montoTotal}");
+
+        return informe;
+
     }
 }
