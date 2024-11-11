@@ -106,6 +106,21 @@ class Program
         }
     }
 
+    static int ObtenerNumero(string mensaje)
+    {
+        int numero;
+        while (true)
+        {
+            Console.Write(mensaje);
+            if (int.TryParse(Console.ReadLine(), out numero))
+            {
+                return numero;
+            }
+            Console.WriteLine("Entrada no válida. Por favor, ingrese un número.");
+        }
+    }
+
+
     static void AltaPedidos(Cadeteria cadeteria)
     {
         //Creacion del Cliente
@@ -131,11 +146,7 @@ class Program
         do
         {
 
-            Console.WriteLine("Nro del Pedido: ");
-            while (!int.TryParse(Console.ReadLine(), out nroPedido))
-            {
-                Console.WriteLine("Por favor, ingrese un numero.");
-            }
+            nroPedido = ObtenerNumero("Ingrese el num del Pedido: ");
 
             if (cadeteria.YaExiste(nroPedido))
             {
@@ -156,13 +167,8 @@ class Program
     
     static void AsignarPedido(Cadeteria cadeteria)
     {
-        Console.Write("Ingrese el Nro del Pedido: ");
-        int nroPedido;
 
-        while (!int.TryParse(Console.ReadLine(), out nroPedido))
-        {
-            Console.WriteLine("Por favor, ingrese un numero.");
-        }
+        int nroPedido = ObtenerNumero("Ingrese el Nro del Pedido: ");
 
         if (!cadeteria.YaExiste(nroPedido))
         {
@@ -172,41 +178,23 @@ class Program
 
         cadeteria.MostrarTodosLosCadetes();
 
-        Console.Write("Ingrese el Id del Cadete al que desea asignar el pedido: ");
-        int idCadete = ObtenerIdCadete();
+        int idCadete = ObtenerNumero("Ingrese el ID del Cadete para Asignarle el Pedido: ");
         
         Console.WriteLine(cadeteria.AsignarCadeteAPedido(idCadete, nroPedido)); //ahora es tipo string, falta mostrarla adecuadamente
 
     }
     
-    static int ObtenerIdCadete()
-    {
-        Console.Write("Ingrese el ID del cadete para asignarle el pedido: ");
-        while (true)
-        {
-            if (int.TryParse(Console.ReadLine(), out int id))
-            {
-                return id;
-            }
-            Console.WriteLine("Por favor, ingrese un ID válido.");
-        }
-    }
-
     static void ReasignarPedido(Cadeteria cadeteria)
     {
-        Console.WriteLine("Ingrese el nro del pedido que desea asignar: ");
-        int nro;
-        while (!int.TryParse(Console.ReadLine(), out nro))
-        {
-            Console.WriteLine("Por favor, ingrese un numero");
-        }
+
+        int nro = ObtenerNumero("Ingrese el Nro del Pedido que Desea Asignar: ");
         
         Pedido pedido = cadeteria.BuscarPedido(nro);
 
         if (pedido != null)
         {
             Console.WriteLine("Pedido Encontrado");
-            int idCadete = ObtenerIdCadete();
+            int idCadete = ObtenerNumero("Ingrese el ID del Cadete para Asignarle el Pedido: ");
             
             Cadete nuevoCadete = cadeteria.BuscarCadetePorId(idCadete);
             if (nuevoCadete != null)
